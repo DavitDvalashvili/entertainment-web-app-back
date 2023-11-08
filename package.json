@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0"
+  },
+  "name": "entertainment-web-app-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "davit dvalashvili",
+  "license": "ISC",
+  "description": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
