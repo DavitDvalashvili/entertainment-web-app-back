@@ -457,6 +457,7 @@ const allMovies = [
 
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
+import * as logger from './utils/logger.js'
 dotenv.config();
 
 
@@ -502,14 +503,11 @@ mongoose
     return moviesModel.find({});
   })
   .then((result) => {
-    console.log("Movies found");
-    result.forEach((movie) => {
-      //console.log(movie);
-    });
+    logger.info("Movies found");
     //return mongoose.connection.close();
   })
   .catch((error) => {
-    console.log(`Have not connected ${error}`);
+   logger.error(`Have not connected ${error}`);
   });
 
 export default moviesModel;

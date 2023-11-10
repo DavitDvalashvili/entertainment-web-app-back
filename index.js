@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import moviesModel from "./mongo.js";
 import dotenv from "dotenv";
+import * as logger from "./utils/logger.js";
 dotenv.config();
 
 const app = express();
@@ -16,25 +17,36 @@ mongoose.connect(URL);
 app.get("/", async (req, res) => {
   const movies = await moviesModel.find({});
   res.send(movies);
-  //console.log(movies.length);
 });
 
 app.get("/movies", async (req, res) => {
-  const movies = await moviesModel.find({ category: "Movie" });
-  res.send(movies);
-  //console.log(movies.length);
+  try {
+    const movies = await moviesModel.find({ category: "Movie" });
+    res.send(movies);
+  } catch (error) {
+    logger.error(error);
+    res.status(404).json({ error: "404 not found" });
+  }
 });
 
 app.get("/tvSeries", async (req, res) => {
-  const series = await moviesModel.find({ category: "TV Series" });
-  res.send(series);
-  //console.log(series.length)
+  try {
+    const series = await moviesModel.find({ category: "TV Series" });
+    res.send(series);
+  } catch (error) {
+    logger.error(error);
+    res.status(404).json({ error: "404 not found" });
+  }
 });
 
 app.get("/bookmarks", async (req, res) => {
-  const bookmarks = await moviesModel.find({ isBookmarked: true });
-  res.send(bookmarks);
-  console.log(bookmarks.length);
+  try {
+    const bookmarks = await moviesModel.find({ isBookmarked: true });
+    res.send(bookmarks);
+  } catch (error) {
+    logger.error(error);
+    res.status(404).json({ error: "404 not found" });
+  }
 });
 
 const pages = ["movies", "tvSeries", "bookmarks"];
@@ -57,12 +69,12 @@ pages.map((page) => {
 
       res.json(updatedMovie);
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
 });
 
 app.listen(PORT, () => {
-  console.log("Express server started on the port 3003");
+  logger.info("Express server started on the port 3003");
 });
