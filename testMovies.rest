@@ -1,3 +1,4 @@
-GET http://localhost:3002/bookmarks
+PUT  http://localhost:3003/tvSeries/654c533d56ba06a78f107a5a
+
 
 

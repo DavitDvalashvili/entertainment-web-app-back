@@ -455,11 +455,13 @@ const allMovies = [
   },
 ];
 
-
-
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
 
-const URL = "mongodb://localhost:27017/MoviesDb";
+
+const URL = process.env.URL || "mongodb://localhost:27017/MoviesDb";
+
 
 const thumbnailSchema = new mongoose.Schema({
   small: String,
@@ -502,7 +504,7 @@ mongoose
   .then((result) => {
     console.log("Movies found");
     result.forEach((movie) => {
-      console.log(movie);
+      //console.log(movie);
     });
     //return mongoose.connection.close();
   })
