@@ -39,9 +39,25 @@ app.get("/tvSeries", async (req, res) => {
   }
 });
 
-app.get("/bookmarks", async (req, res) => {
+app.get("/bookmarks/tvSeries", async (req, res) => {
   try {
-    const bookmarks = await moviesModel.find({ isBookmarked: true });
+    const bookmarks = await moviesModel.find({
+      isBookmarked: true,
+      category: "TV Series",
+    });
+    res.send(bookmarks);
+  } catch (error) {
+    logger.error(error);
+    res.status(404).json({ error: "404 not found" });
+  }
+});
+
+app.get("/bookmarks/movies", async (req, res) => {
+  try {
+    const bookmarks = await moviesModel.find({
+      isBookmarked: true,
+      category: "Movie",
+    });
     res.send(bookmarks);
   } catch (error) {
     logger.error(error);
