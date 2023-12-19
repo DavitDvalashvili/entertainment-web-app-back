@@ -456,49 +456,6 @@
 //   },
 // ];
 
-// app.get("/bookmarks/movies", async (req, res) => {
-//   try {
-//     const bookmarks = await moviesModel.find({
-//       isBookmarked: true,
-//       category: "Movie",
-//     });
-//     res.send(bookmarks);
-//   } catch (error) {
-//     logger.error(error);
-//     res.status(404).json({ error: "404 not found" });
-//   }
-// });
-
-// const pages = ["movies", "tvSeries", "bookmarks"];
-
-// pages.map((page) => {
-//   app.put(`/${page}/:movieID`, async (req, res) => {
-//     try {
-//       const movieID = req.params.movieID;
-//       const existingMovie = await moviesModel.findById(movieID);
-
-//       if (!existingMovie) {
-//         return res.status(404).json({ error: "Movie not found" });
-//       }
-
-//       // Toggle the isBookmarked field
-//       existingMovie.isBookmarked = !existingMovie.isBookmarked;
-
-//       // Save the updated document
-//       const updatedMovie = await existingMovie.save();
-
-//       res.json(updatedMovie);
-//     } catch (error) {
-//       logger.error(error);
-//       res.status(500).json({ error: "Internal Server Error" });
-//     }
-//   });
-// });
-
-// app.listen(PORT, () => {
-//   logger.info("Express server started on the port 3003");
-// });
-
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -515,7 +472,7 @@ const MONGO_URL = process.env.MONGO_URL;
 
 app.use(
   cors({
-    origin: "http://localhost:3476",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
