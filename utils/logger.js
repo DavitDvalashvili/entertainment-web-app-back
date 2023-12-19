@@ -1,9 +1,9 @@
-const info = (...params) => {
-    console.log(...params);
-}
+// const info = (...params) => {
+//     console.log(...params);
+// }
 
-const error = (...params) => {
-    console.log(...params);
-}
+// const error = (...params) => {
+//     console.log(...params);
+// }
 
-export {info, error};
+// export {info, error};
