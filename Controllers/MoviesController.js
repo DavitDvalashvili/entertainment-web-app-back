@@ -90,3 +90,36 @@ export const updateMovie = async (req, res, next) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const filterMovies = async (req, res, next) => {
+  try {
+    const { searchTerm, category, bookmark } = req.query;
+
+    // Define the base query object
+    let query = {};
+
+    // Add search term condition if searchTerm exists
+    if (searchTerm && searchTerm.trim() !== "") {
+      query.title = { $regex: searchTerm, $options: "i" };
+    }
+
+    // Add additional conditions based on the page and bookmark parameters
+    if (category === "movies") {
+      query.category = "Movie";
+    } else if (category === "tvSeries") {
+      query.category = "TV Series";
+    }
+
+    if (bookmark === "true") {
+      query.isBookmarked = true;
+    }
+
+    // Perform the search based on the constructed query
+    const searchedMovies = await moviesModel.find(query);
+    res.status(200);
+    res.send(searchedMovies);
+    next();
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
