@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-//import * as logger from "./utils/logger.js";
 
 // config dotenv
 dotenv.config();
@@ -12,6 +11,7 @@ const thumbnailSchema = new mongoose.Schema({
   id: String,
 });
 
+// Define schema for movies
 export const movieSchema = new mongoose.Schema({
   thumbnail: {
     trending: thumbnailSchema,
@@ -26,6 +26,7 @@ export const movieSchema = new mongoose.Schema({
   id: String,
 });
 
+// Define toJSON method to customize JSON output
 movieSchema.set("toJSON", {
   transform: (Document, returnObject) => {
     returnObject.id = returnObject._id.toString();

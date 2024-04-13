@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
+// Define schema for users
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, "Your email address is required"],
+    required: [true, "Email address is required"],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "Your password is required"],
+    required: [true, "Password is required"],
   },
   createdAt: {
     type: Date,
@@ -17,8 +17,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 12);
+// Define toJSON method to customize JSON output
+userSchema.set("toJSON", {
+  transform: (document, returnObject) => {
+    returnObject.id = returnObject._id.toString();
+    delete returnObject._id;
+    delete returnObject.__v;
+  },
 });
 
 const User = mongoose.model("Users", userSchema);
