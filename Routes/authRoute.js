@@ -12,6 +12,6 @@ router.post("/signUp", signUp);
 router.post("/signIn", signIn);
 
 // Route to handle user sign out
-router.get("/signOut", signOut);
+router.post("/signOut", signOut);
 
 export default router;
