@@ -62,7 +62,10 @@ export const signIn = async (req, res) => {
 export const signOut = async (req, res) => {
   try {
     // Clear the access_token cookie
-    res.clearCookie("access_token");
+    res.clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    });
     res.status(200).json({ message: "User has been logged out" });
   } catch (error) {
     console.error("signOut error:", error.message);
