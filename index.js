@@ -24,7 +24,7 @@ mongoose
 // Enable Cross-Origin Resource Sharing (CORS) middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://entertainment-web-app-front-beige.vercel.app",
     credentials: true,
   })
 );
