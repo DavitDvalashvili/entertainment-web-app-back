@@ -63,6 +63,7 @@ export const signOut = async (req, res) => {
   try {
     // Clear the access_token cookie
     res.clearCookie("access_token", {
+      httpOnly: true,
       sameSite: "none",
       secure: true,
     });
